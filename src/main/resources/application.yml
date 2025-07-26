@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: document-access-control
+  profiles:
+    active: docker
+
+# JWT configuration
+jwt:
+  secret: ${JWT_SECRET:default_secret}
+  expiration: 3600000 # 1 hour
+
+
