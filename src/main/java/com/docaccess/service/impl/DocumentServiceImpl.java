@@ -120,6 +120,12 @@ public DocumentResponse getDocumentById(String username, Long id) {
                     logger.warn("Document with ID {} not found", documentId);
                     return new ResourceNotFoundException("Document not found");
                 });
+
+        boolean exists = permissionRepository.existsPermission(request.getUsername(), document.getId(), request.getPermission());
+        if (exists) {
+            throw new IllegalStateException("Permission already granted");
+        }
+
         Permission permission = new Permission();
         permission.setUser(targetUser);
         permission.setDocument(document);
